@@ -2,9 +2,9 @@
 /******************************************************************************
 Name: Herencia de clases
 Author: Juan Romero 
-Date: 09/09/2021
+Date: 07/09/2021
 
-Purpose: herencia múltiple
+Purpose: Primera clase de herencia
 
 Usage: plug and play
 
@@ -15,46 +15,51 @@ Usage: plug and play
 #include <stdio.h>
 using namespace std;
 
-class deporte{
+class pantallas{
   public:
-    int tiempo =90;
-    int num_tiempos =2;
-    int num_jugadores =22;
-    void ingresar_financiacion( string fin){financiacion = fin;};
-      private:
-    string financiacion = "Ardila Lule";
+    int tamaño = 21;
+    int nits = 200;
+    string resolucion = "1080 x 720";
+  private:
+    string codex = "nn";
+    string serial;
+};
+ 
+
+class electrodomestico{
+  public:
+    float precio;
+    string marca;
+    string referencia;
+
+  private:
+    int absolescencia_programada = 2;
 };
 
-class directivos{
+class monitor: public electrodomestico, public pantallas{
   public:
-    int nombres[5];
-    string accionista_mayoritario;
+    int HDMI_num_ports = 1;
+    bool pcie = false;
+    bool VGA = false;
+    int usb = 1;
+
+    monitor(int temp_HDMI_num_ports, bool temp_pcie, bool temp_VGA, int temp_usb, float temp_precio, string temp_resolucion,int temp_tamaño );
   private:
-    int ganancias = 0;
-    string contratos = "0";
+    int time_response = 6;
+    int freq = 60;
 };
 
-class equipo_futbol: public deporte, public directivos{
-  public:
-    string nombre_equipo ="nn";
-    string nombre_jugadores[25];
-    string nombre_tecnico = "Maturana";
-  private:
-    string formacion;
-    string prox_fichajes[5]; 
-};
+  monitor::monitor(int temp_HDMI_num_ports, bool temp_pcie, bool temp_VGA, int temp_usb, float temp_precio, string temp_resolucion,int temp_tamaño ): HDMI_num_ports(temp_HDMI_num_ports), pcie(temp_pcie), VGA(temp_VGA), usb(temp_usb) {
+    precio = temp_precio;
+    resolucion = temp_resolucion;
+    tamaño = temp_tamaño;
+  };
 
 int main() {
 
-  equipo_futbol bucaros;
-  bucaros.nombre_tecnico = "Sergio Novoa";
-  bucaros.nombre_equipo = "Atlético Bucaramanga";
-  bucaros.accionista_mayoritario = "Oscar Álvarez";
-  bucaros.nombre_jugadores[0] = "Sherman Cárdenas";
-  bucaros.nombre_jugadores[1] = "Brayan Fernadez";
-  bucaros.nombre_jugadores[2] = "James Aguirre";
-  bucaros.ingresar_financiacion("Fresa Leche");
+  monitor LG(1,true, true,3,600000,"1440 x1080", 26);
+  cout << "El monitor LG cuenta con prestaciones como : "<< LG.resolucion << " como resolución nativa, " <<  LG.tamaño << "´ de tamaño de pantalla a un valor de " << LG.precio <<endl;
 
-  cout << "El equipo " << bucaros.nombre_equipo << " cuenta con estrellas como " <<  bucaros.nombre_jugadores[0] <<" ,"<< bucaros.nombre_jugadores[1] <<" o " << bucaros.nombre_jugadores[2] << ". Busca su primera estrella con " <<  bucaros.nombre_tecnico  << " a la cabeza." <<endl; 
+
 return 0;
 }
